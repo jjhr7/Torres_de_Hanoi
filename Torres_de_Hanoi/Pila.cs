@@ -12,25 +12,26 @@ namespace Torres_de_Hanoi
         //Representa la cantidad de discos que hay en la pila
         private int size;
         //Representa el disco que está en la parte superior del pila
-        private string top;
+        private int top;
         //Representa el conjunto de discos que hay en la pila
         private List<Disco> elementos;
         
-        //Constructor parametrizado
-        public Pila(int size, string top)
+        //Constructor
+        public Pila()
         {
-            Size = size;
-            Top = top;
+            Size = 0;
+            Top = 0;
             Elementos = new List<Disco>();
         }
-
+        
+        //Getters y setters 
         public int Size
         {
             get => size;
             set => size = value;
         }
 
-        public string Top
+        public int Top
         {
             get => top;
             set => top = value;
@@ -42,22 +43,27 @@ namespace Torres_de_Hanoi
             set => elementos = value;
         }
         
-        
+        //Metodos   
         public void push(Disco d)
         {
             Elementos.Add(d);
+            Top = d.Valor;
+            Size++;
+            
         }
 
         public Disco pop()
         {
-            Disco ultimoElemento = Elementos[Elementos.Count];
-            Elementos.Remove(Elementos[Elementos.Count]);
+            Disco ultimoElemento = Elementos[Size];
+            Elementos.RemoveAt(Size);
+            Size--;
+            Top = Elementos[Size].Valor;
             return ultimoElemento;
         }                
 
         public bool isEmpty()
         {
-            if (Elementos.Count()==0) {
+            if (Size==0) {
                 return true;
             } else {
                 return false;
