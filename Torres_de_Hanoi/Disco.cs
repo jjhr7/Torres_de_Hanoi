@@ -12,7 +12,7 @@ namespace Torres_de_Hanoi
 
         public Disco(int valor)
         {
-            this.Valor = valor;
+            Valor = valor;
         }
 
         public int Valor
