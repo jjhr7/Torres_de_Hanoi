@@ -54,20 +54,20 @@ namespace Torres_de_Hanoi
 
         public Disco pop()
         {
-            Disco ultimoElemento = Elementos[Size];
-            Elementos.RemoveAt(Size);
+            Disco ultimoElemento = Elementos[Size-1];
+            Elementos.RemoveAt(Size-1);
             Size--;
-            Top = Elementos[Size].Valor;
+            Top = Elementos[Size-1].Valor;
             return ultimoElemento;
         }                
 
         public bool isEmpty()
         {
-            if (Size==0) {
+            if (Elementos.Count == 0) {
                 return true;
-            } else {
-                return false;
             }
+
+            return false;
         }
 
     }

@@ -30,6 +30,7 @@ namespace Torres_de_Hanoi
                 }
                 else
                 {
+                    Console.WriteLine("Tamaño de la pila A: "+a.Size);
                     a.push(b.pop());
                     Console.WriteLine("Moviendo de B a A");
                 }
@@ -39,7 +40,65 @@ namespace Torres_de_Hanoi
 
         public int iterativo(int n, Pila ini, Pila fin, Pila aux)
         {
-            return 0;
+            int nmovimientos = 0;
+            bool solucion = false;
+
+            for (int i = n; i > 0; i--)
+            {
+                Disco nuevoDisco = new Disco(i);
+                ini.push(nuevoDisco);
+
+            }
+            
+            if (n % 2 == 0)
+            {
+                while (!solucion)
+                {
+                    mover_disco(ini,fin);
+                    nmovimientos++;
+                    
+                    mover_disco(ini, aux);
+                    nmovimientos++;
+                    
+                    mover_disco(aux, fin);
+                    nmovimientos++;
+
+                    solucion = comprobarSolucion(fin);
+                }
+            }
+            else
+            {
+                while (!solucion)
+                {
+                    mover_disco(ini,aux);
+                    nmovimientos++;
+                    
+                    mover_disco(ini, fin);
+                    nmovimientos++;
+                    
+                    mover_disco(aux, fin);
+                    nmovimientos++;
+
+                    solucion = comprobarSolucion(fin);
+                }
+            }
+
+            return nmovimientos;
+        }
+        
+        public bool comprobarSolucion(Pila pila)
+        {
+            bool solucion = true;
+
+            for (int i = pila.Size; i > 0 && solucion  ;i--)
+            {
+                if (pila.Elementos[i].Valor > pila.Elementos[i - 1].Valor)
+                {
+                    solucion = false;
+                }
+            }
+            
+            return solucion;
         }
 
     }
