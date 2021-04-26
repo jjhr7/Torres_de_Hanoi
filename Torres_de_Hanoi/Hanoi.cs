@@ -8,15 +8,18 @@ namespace Torres_de_Hanoi
 {
     class Hanoi
     {
+
+        private int nMovimientos;
+        private int discos;
         
         public void mover_disco(Pila a, Pila b)
         {
-            if (!a.isEmpty() && b.isEmpty())
+            if (b.isEmpty())
             {
                 b.push(a.pop());
                 Console.WriteLine("Moviendo de A a B");
             }
-            else if (!b.isEmpty() && a.isEmpty())
+            else if ( a.isEmpty())
             {
                 a.push(b.pop());
                 Console.WriteLine("Moviendo de B a A");
@@ -30,7 +33,6 @@ namespace Torres_de_Hanoi
                 }
                 else
                 {
-                    Console.WriteLine("Tamaño de la pila A: "+a.Size);
                     a.push(b.pop());
                     Console.WriteLine("Moviendo de B a A");
                 }
@@ -40,65 +42,49 @@ namespace Torres_de_Hanoi
 
         public int iterativo(int n, Pila ini, Pila fin, Pila aux)
         {
-            int nmovimientos = 0;
-            bool solucion = false;
-
-            for (int i = n; i > 0; i--)
-            {
-                Disco nuevoDisco = new Disco(i);
-                ini.push(nuevoDisco);
-
-            }
-            
-            if (n % 2 == 0)
+             nMovimientos = 0;
+             bool solucion = false;
+             
+            if (n % 2 != 0)
             {
                 while (!solucion)
                 {
-                    mover_disco(ini,fin);
-                    nmovimientos++;
+                    comprobarSolucion(ini,fin, fin);
+                    comprobarSolucion(ini, aux, fin);
+                    comprobarSolucion(aux, fin, fin);
                     
-                    mover_disco(ini, aux);
-                    nmovimientos++;
-                    
-                    mover_disco(aux, fin);
-                    nmovimientos++;
-
-                    solucion = comprobarSolucion(fin);
+                    if (fin.Size == n)
+                    {
+                        solucion = true;
+                    }
                 }
             }
             else
             {
                 while (!solucion)
                 {
-                    mover_disco(ini,aux);
-                    nmovimientos++;
-                    
-                    mover_disco(ini, fin);
-                    nmovimientos++;
-                    
-                    mover_disco(aux, fin);
-                    nmovimientos++;
+                    comprobarSolucion(ini,aux, fin);
+                    comprobarSolucion(ini, fin, fin);
+                    comprobarSolucion(aux, fin, fin);
 
-                    solucion = comprobarSolucion(fin);
+                    if (fin.Size == n)
+                    {
+                        solucion = true;
+                    }
                 }
             }
 
-            return nmovimientos;
+            return nMovimientos;
         }
         
-        public bool comprobarSolucion(Pila pila)
+        public void comprobarSolucion(Pila a, Pila b, Pila fin)
         {
-            bool solucion = true;
-
-            for (int i = pila.Size; i > 0 && solucion  ;i--)
+            if (fin.Size < discos)
             {
-                if (pila.Elementos[i].Valor > pila.Elementos[i - 1].Valor)
-                {
-                    solucion = false;
-                }
+                nMovimientos++;
+                
+                mover_disco(a, b);
             }
-            
-            return solucion;
         }
 
     }

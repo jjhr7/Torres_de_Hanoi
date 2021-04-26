@@ -1,0 +1,7 @@
+C:\ProyectosGTI\Segundo\SegundoCuatri\ProyectosMates\Torres_de_Hanoi\Torres_de_Hanoi\bin\Debug\Torres_de_Hanoi.exe.config
+C:\ProyectosGTI\Segundo\SegundoCuatri\ProyectosMates\Torres_de_Hanoi\Torres_de_Hanoi\bin\Debug\Torres_de_Hanoi.exe
+C:\ProyectosGTI\Segundo\SegundoCuatri\ProyectosMates\Torres_de_Hanoi\Torres_de_Hanoi\bin\Debug\Torres_de_Hanoi.pdb
+C:\ProyectosGTI\Segundo\SegundoCuatri\ProyectosMates\Torres_de_Hanoi\Torres_de_Hanoi\obj\Debug\Torres_de_Hanoi.csprojAssemblyReference.cache
+C:\ProyectosGTI\Segundo\SegundoCuatri\ProyectosMates\Torres_de_Hanoi\Torres_de_Hanoi\obj\Debug\Torres_de_Hanoi.csproj.CoreCompileInputs.cache
+C:\ProyectosGTI\Segundo\SegundoCuatri\ProyectosMates\Torres_de_Hanoi\Torres_de_Hanoi\obj\Debug\Torres_de_Hanoi.exe
+C:\ProyectosGTI\Segundo\SegundoCuatri\ProyectosMates\Torres_de_Hanoi\Torres_de_Hanoi\obj\Debug\Torres_de_Hanoi.pdb

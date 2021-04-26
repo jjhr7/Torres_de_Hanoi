@@ -54,10 +54,10 @@ namespace Torres_de_Hanoi
 
         public Disco pop()
         {
-            Disco ultimoElemento = Elementos[Size-1];
-            Elementos.RemoveAt(Size-1);
+            Disco ultimoElemento = Elementos[Elementos.Count-1];
+            Elementos.RemoveAt(Elementos.Count-1);
             Size--;
-            Top = Elementos[Size-1].Valor;
+            Top = Elementos[Elementos.Count-1].Valor;
             return ultimoElemento;
         }                
 
@@ -68,6 +68,21 @@ namespace Torres_de_Hanoi
             }
 
             return false;
+        }
+        
+        public Disco getLastElement()
+        {
+            return Elementos[Elementos.Count - 1];
+        }
+        
+        public String toString()
+        {
+            String res = "La torre tiene: ";
+            for(int i = 0; i < Elementos.Count; i++)
+            {
+                res += "  " + Elementos[i].Valor;
+            }
+            return res; 
         }
 
     }

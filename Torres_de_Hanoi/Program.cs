@@ -14,13 +14,26 @@ namespace Torres_de_Hanoi
             Console.WriteLine("Pilas de Hanoi");
             Console.WriteLine("Introduce el numero de discos con el que quieres operar");
             
-            int ndiscos = int.Parse(Console.ReadLine());
+            int ndiscos;
+            String numeroDiscos = Console.ReadLine();
+            while (!Int32.TryParse(numeroDiscos.ToString(), out ndiscos) || ndiscos<=0)
+            {
+                Console.WriteLine("Introduzca la cantidad de discos,el número ha de ser mayor a 0:");
+                numeroDiscos = Console.ReadLine().ToString();
+            }
 
 
 
             Pila Pila1 = new Pila();
             Pila Pila2 = new Pila();
             Pila Pila3 = new Pila();
+            
+            for (int i = ndiscos; i > 0; i--)
+            {
+                Disco d = new Disco(i);
+                d.Valor = i;
+                Pila1.push(d);
+            }
 
             Hanoi PilasHanoi = new Hanoi();
 
