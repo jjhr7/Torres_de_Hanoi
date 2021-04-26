@@ -24,9 +24,11 @@ namespace Torres_de_Hanoi
                 a.push(b.pop());
                 Console.WriteLine("Moviendo de B a A");
             }
-            else 
+            else
             {
-                if (a.Top < b.Top)
+                Disco dA = b.getLastElement();
+                Disco dB = a.getLastElement();
+                if (dA.Valor < dB.Valor)
                 {
                     b.push(a.pop());
                     Console.WriteLine("Moviendo de A a B");
@@ -43,6 +45,7 @@ namespace Torres_de_Hanoi
         public int iterativo(int n, Pila ini, Pila fin, Pila aux)
         {
              nMovimientos = 0;
+             discos = n;
              bool solucion = false;
              
             if (n % 2 != 0)

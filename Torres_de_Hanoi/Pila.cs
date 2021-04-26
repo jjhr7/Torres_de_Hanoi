@@ -57,7 +57,6 @@ namespace Torres_de_Hanoi
             Disco ultimoElemento = Elementos[Elementos.Count-1];
             Elementos.RemoveAt(Elementos.Count-1);
             Size--;
-            Top = Elementos[Elementos.Count-1].Valor;
             return ultimoElemento;
         }                
 
