@@ -6,89 +6,121 @@ using System.Threading.Tasks;
 
 namespace Torres_de_Hanoi
 {
-    class Hanoi
+ class Hanoi
     {
-
-        private int nMovimientos;
+        private int movimientos;
         private int discos;
-        
+
+
         public void mover_disco(Pila a, Pila b)
         {
+           
             if (b.isEmpty())
             {
-                b.push(a.pop());
-                Console.WriteLine("Moviendo de A a B");
+                registrarMovimiento(a, b);
             }
-            else if ( a.isEmpty())
+            else if (a.isEmpty())
             {
-                a.push(b.pop());
-                Console.WriteLine("Moviendo de B a A");
+                registrarMovimiento(b, a);
+
             }
             else
             {
-                Disco dA = b.getLastElement();
-                Disco dB = a.getLastElement();
-                if (dA.Valor < dB.Valor)
+                Disco discoA = b.lastElement();
+                Disco discoB = a.lastElement();
+                if(discoA.Valor < discoB.Valor)
                 {
-                    b.push(a.pop());
-                    Console.WriteLine("Moviendo de A a B");
+                    registrarMovimiento(b, a);
                 }
                 else
                 {
-                    a.push(b.pop());
-                    Console.WriteLine("Moviendo de B a A");
+                    registrarMovimiento(a, b);
                 }
             }
-            
+           
+        }
+
+        public void registrarMovimiento(Pila a, Pila b)
+        {
+
+            Disco tmp = a.pop();
+            Console.WriteLine("Se ha movido el disco: "+tmp.Valor);
+            b.push(tmp);
         }
 
         public int iterativo(int n, Pila ini, Pila fin, Pila aux)
         {
-             nMovimientos = 0;
-             discos = n;
-             bool solucion = false;
-             
+            movimientos = 0;
+            discos = n;
+            Boolean condicionSeguir = true;
             if (n % 2 != 0)
             {
-                while (!solucion)
+                while (condicionSeguir)
                 {
-                    comprobarSolucion(ini,fin, fin);
-                    comprobarSolucion(ini, aux, fin);
-                    comprobarSolucion(aux, fin, fin);
-                    
+                    comprobacionMovimiento(ini,fin, fin);
+                    comprobacionMovimiento(ini, aux, fin);
+                    comprobacionMovimiento(aux, fin, fin);
+
                     if (fin.Size == n)
                     {
-                        solucion = true;
+                        condicionSeguir = false;
                     }
                 }
             }
             else
             {
-                while (!solucion)
+
+                while (condicionSeguir)
                 {
-                    comprobarSolucion(ini,aux, fin);
-                    comprobarSolucion(ini, fin, fin);
-                    comprobarSolucion(aux, fin, fin);
+                    comprobacionMovimiento(ini, aux, fin);
+                    comprobacionMovimiento(ini, fin, fin);
+                    comprobacionMovimiento(aux, fin, fin);
 
                     if (fin.Size == n)
                     {
-                        solucion = true;
+                        condicionSeguir = false;
                     }
                 }
             }
-
-            return nMovimientos;
+            return movimientos;
         }
-        
-        public void comprobarSolucion(Pila a, Pila b, Pila fin)
+
+        public int algoritmoRecursivo (int n, Pila ini, Pila fin, Pila aux)
         {
+            discos = n;
+            movimientos = algoritmoRecursivoReal(n, ini, fin, aux);
+            return movimientos;
+        }
+
+        private int algoritmoRecursivoReal(int n, Pila ini, Pila fin, Pila aux)
+        {
+            
+            if (n == 1)
+            {
+                comprobacionMovimiento(ini, fin, fin);
+
+            }
+            else
+            {
+                algoritmoRecursivoReal(n-1, ini, aux, fin);
+                comprobacionMovimiento(ini, fin, fin);
+                algoritmoRecursivoReal(n-1, aux, fin, ini);
+            }
+            return movimientos;
+        }
+
+
+
+
+        private void comprobacionMovimiento(Pila a, Pila b, Pila fin)
+        {
+            
             if (fin.Size < discos)
             {
-                nMovimientos++;
-                
+                movimientos++;
+
                 mover_disco(a, b);
             }
         }
-
     }
 }

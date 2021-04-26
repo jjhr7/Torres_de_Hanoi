@@ -9,80 +9,54 @@ namespace Torres_de_Hanoi
 {
     class Pila
     {
-        //Representa la cantidad de discos que hay en la pila
-        private int size;
-        //Representa el disco que está en la parte superior del pila
-        private int top;
-        //Representa el conjunto de discos que hay en la pila
-        private List<Disco> elementos;
+        public int Size { get; set; }
+        public int Top { get; set; }
+
+
+        public List<Disco> Elementos { get; set; }
         
-        //Constructor
+
+        /* TODO: Implementar métodos */
         public Pila()
         {
-            Size = 0;
-            Top = 0;
             Elementos = new List<Disco>();
-        }
-        
-        //Getters y setters 
-        public int Size
-        {
-            get => size;
-            set => size = value;
+            Size = 0;
+
         }
 
-        public int Top
-        {
-            get => top;
-            set => top = value;
-        }
-
-        public List<Disco> Elementos
-        {
-            get => elementos;
-            set => elementos = value;
-        }
-        
-        //Metodos   
         public void push(Disco d)
         {
+          
             Elementos.Add(d);
-            Top = d.Valor;
             Size++;
-            
         }
 
         public Disco pop()
         {
-            Disco ultimoElemento = Elementos[Elementos.Count-1];
-            Elementos.RemoveAt(Elementos.Count-1);
+            Disco disco = Elementos[Elementos.Count-1];
+            Elementos.RemoveAt(Elementos.Count - 1);
             Size--;
-            return ultimoElemento;
+            return disco;
         }                
 
         public bool isEmpty()
         {
-            if (Elementos.Count == 0) {
-                return true;
-            }
-
-            return false;
+            return Size == 0;
         }
-        
-        public Disco getLastElement()
+
+        public Disco lastElement()
         {
             return Elementos[Elementos.Count - 1];
         }
-        
+
         public String toString()
         {
-            String res = "La torre tiene: ";
+            String res = "La torre tiene los siguientes discos: ";
             for(int i = 0; i < Elementos.Count; i++)
             {
                 res += "  " + Elementos[i].Valor;
             }
             return res; 
         }
-
     }
 }

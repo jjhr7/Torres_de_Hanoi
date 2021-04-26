@@ -10,40 +10,49 @@ namespace Torres_de_Hanoi
     {
         static void Main(string[] args)
         {
-            
-            Console.WriteLine("Pilas de Hanoi");
-            Console.WriteLine("Introduce el numero de discos con el que quieres operar");
-            
-            int ndiscos;
-            String numeroDiscos = Console.ReadLine();
-            while (!Int32.TryParse(numeroDiscos.ToString(), out ndiscos) || ndiscos<=0)
+            Console.WriteLine("Introduzca la cantidad de discos:");
+            int valorNumerico;
+            String numeroDiscos = Console.ReadLine().ToString();
+            while (!Int32.TryParse(numeroDiscos.ToString(), out valorNumerico) || valorNumerico<=0)
             {
                 Console.WriteLine("Introduzca la cantidad de discos,el número ha de ser mayor a 0:");
                 numeroDiscos = Console.ReadLine().ToString();
             }
-
-
-
-            Pila Pila1 = new Pila();
-            Pila Pila2 = new Pila();
-            Pila Pila3 = new Pila();
+            Pila ini = new Pila();
+            Pila aux = new Pila();
+            Pila fin = new Pila();
             
-            for (int i = ndiscos; i > 0; i--)
+            for (int i = valorNumerico; i > 0; i--)
             {
-                Disco d = new Disco(i);
+                Disco d = new Disco();
                 d.Valor = i;
-                Pila1.push(d);
+                ini.push(d);
             }
 
-            Hanoi PilasHanoi = new Hanoi();
 
-            int nMovimientos = PilasHanoi.iterativo(ndiscos,  Pila1,Pila2,Pila3);
-            
-            Console.WriteLine("El problema se ha resuelto en " + nMovimientos + " movimientos.");
+            Hanoi hanoi = new Hanoi();
+            Console.WriteLine("Seleccione la opcion para resolver la torre\na)Iterativo\nb)Recursivo");
+            ConsoleKey tecla = Console.ReadKey().Key;
+            while (tecla != ConsoleKey.A && tecla != ConsoleKey.B)
+            {
+                Console.WriteLine("\nSeleccione la opcion para resolver la torre\na)Iterativo\nb)Recursivo");
+                tecla = Console.ReadKey().Key;
+            }
 
-            Console.WriteLine("Pulse cualquier tecla para salir");
+            if (tecla == ConsoleKey.A)
+            {
+                Console.WriteLine("\nIterativo: Movimientos realizados: " + hanoi.iterativo(valorNumerico, ini, fin, aux));
+            }
+            else if (tecla == ConsoleKey.B)
+            {
+                Console.WriteLine("\nRecursivo: Movimientos realizados: " + hanoi.algoritmoRecursivo(valorNumerico, ini, fin, aux));
+            }
+            Console.WriteLine("Mínimo de movimientos: " + (Math.Pow(2, valorNumerico)-1) );
+            Console.WriteLine("Torre Fin -> "+fin.toString());
+
+            Console.WriteLine("Press any key to exit.");
+           
             Console.ReadKey();
-            
         }
 
     }
